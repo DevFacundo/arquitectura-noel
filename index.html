@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hablemos de tu proyecto | noel</title>
+  <meta name="robots" content="noindex">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+
+    <!-- Barra superior: logo + progreso (visible solo en los pasos 1 a 7) -->
+    <header class="topbar" id="topbar" hidden>
+      <span></span>
+      <span class="logo logo--compact" role="img" aria-label="noel, estudio de arquitectura">
+            <span class="logo__name" aria-hidden="true">no<span class="logo__e">ë</span>l</span>
+            <span class="logo__sub" aria-hidden="true">estudio arquitectura</span>
+            <span class="logo__rule" aria-hidden="true"></span>
+          </span>
+      <p class="topbar__count" id="stepCount" aria-live="polite"></p>
+    </header>
+    <div class="progress" id="progress" role="progressbar" aria-label="Progreso del formulario"
+         aria-valuemin="1" aria-valuemax="7" aria-valuenow="1" hidden>
+      <span class="progress__fill" id="progressFill"></span>
+    </div>
+
+    <main>
+
+      <!-- Bienvenida -->
+      <section class="screen welcome" data-step="0" aria-labelledby="title-0">
+        <div class="welcome__body">
+          <span class="logo" role="img" aria-label="noel, estudio de arquitectura">
+            <span class="logo__name" aria-hidden="true">no<span class="logo__e">ë</span>l</span>
+            <span class="logo__sub" aria-hidden="true">estudio arquitectura</span>
+            <span class="logo__rule" aria-hidden="true"></span>
+          </span>
+          <h1 class="title" id="title-0" tabindex="-1">Hablemos de tu proyecto</h1>
+          <p class="lead">Contanos qué tenés en mente. Estas preguntas nos ayudarán a conocer mejor tu proyecto y entender cómo podemos ayudarte.</p>
+          <button class="btn" type="button" id="startBtn">Comenzar</button>
+        </div>
+      </section>
+
+      <!-- Formulario: pasos 1 a 7 -->
+      <form id="projectForm" novalidate hidden>
+
+        <!-- Paso 1: contacto -->
+        <section class="screen" data-step="1" aria-labelledby="title-1" hidden>
+          <h1 class="title" id="title-1" tabindex="-1">Empecemos por conocerte</h1>
+          <p class="lead">Los campos con <span aria-hidden="true">*</span><span class="sr-only">asterisco</span> son obligatorios.</p>
+
+          <div class="field" data-field="nombre">
+            <label class="label" for="nombre">Nombre y apellido <span aria-hidden="true">*</span></label>
+            <input id="nombre" name="nombre" type="text" autocomplete="name" required aria-describedby="nombre-error">
+            <p class="field__error" id="nombre-error" hidden></p>
+          </div>
+
+          <div class="field" data-field="email">
+            <label class="label" for="email">Email <span aria-hidden="true">*</span></label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" required aria-describedby="email-error">
+            <p class="field__error" id="email-error" hidden></p>
+          </div>
+
+          <div class="field" data-field="telefono">
+            <label class="label" for="telefono">Teléfono / WhatsApp <span aria-hidden="true">*</span></label>
+            <input id="telefono" name="telefono" type="tel" autocomplete="tel" inputmode="tel" required aria-describedby="telefono-error">
+            <p class="field__error" id="telefono-error" hidden></p>
+          </div>
+
+          <div class="field" data-field="localidad">
+            <label class="label" for="localidad">Ciudad / localidad <span aria-hidden="true">*</span></label>
+            <input id="localidad" name="localidad" type="text" autocomplete="address-level2" required aria-describedby="localidad-error">
+            <p class="field__error" id="localidad-error" hidden></p>
+          </div>
+
+          <fieldset class="field">
+            <legend class="label">¿Cómo llegaste a nosotros?</legend>
+            <div class="choices" data-choice="como_llego"></div>
+          </fieldset>
+        </section>
+
+        <!-- Paso 2: tipo de proyecto -->
+        <section class="screen" data-step="2" aria-labelledby="title-2" hidden>
+          <h1 class="title" id="title-2" tabindex="-1">Contanos sobre tu proyecto</h1>
+
+          <fieldset class="field" data-field="tipo_proyecto">
+            <legend class="label">¿Qué tipo de proyecto estás pensando? <span aria-hidden="true">*</span></legend>
+            <div class="choices" data-choice="tipo_proyecto"></div>
+            <p class="field__error" id="tipo_proyecto-error" hidden></p>
+          </fieldset>
+        </section>
+
+        <!-- Paso 3: preguntas condicionales según el tipo de proyecto -->
+        <section class="screen" data-step="3" aria-labelledby="title-3" hidden>
+          <h1 class="title" id="title-3" tabindex="-1">Sobre el lugar</h1>
+          <p class="lead">Si algo todavía no lo tenés definido, podés dejarlo en blanco.</p>
+
+          <div data-branch="Obra nueva" hidden>
+            <fieldset class="field">
+              <legend class="label">¿Ya tenés un terreno?</legend>
+              <div class="choices" data-choice="terreno"></div>
+            </fieldset>
+            <div class="field">
+              <label class="label" for="ubicacion-nueva">¿Dónde se encuentra el terreno?</label>
+              <input id="ubicacion-nueva" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+            </div>
+            <div class="field">
+              <label class="label" for="superficie-nueva">¿Cuál es aproximadamente la superficie del terreno?</label>
+              <input id="superficie-nueva" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 300 m²" disabled>
+            </div>
+          </div>
+
+          <div data-branch="Reforma" hidden>
+            <div class="field">
+              <label class="label" for="ubicacion-reforma">¿Dónde se encuentra la propiedad?</label>
+              <input id="ubicacion-reforma" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+            </div>
+            <fieldset class="field">
+              <legend class="label">¿Qué tipo de reforma estás pensando?</legend>
+              <div class="choices" data-choice="reforma_tipo"></div>
+            </fieldset>
+            <div class="field">
+              <label class="label" for="superficie-reforma">¿Cuál es aproximadamente la superficie existente?</label>
+              <input id="superficie-reforma" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
+            </div>
+          </div>
+
+          <div data-branch="Ampliación" hidden>
+            <div class="field">
+              <label class="label" for="ubicacion-ampliacion">¿Dónde se encuentra la propiedad?</label>
+              <input id="ubicacion-ampliacion" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+            </div>
+            <fieldset class="field">
+              <legend class="label">¿Qué te gustaría ampliar?</legend>
+              <div class="choices" data-choice="ampliacion_espacios"></div>
+            </fieldset>
+            <div class="field">
+              <label class="label" for="superficie-ampliacion">¿Cuál es aproximadamente la superficie existente?</label>
+              <input id="superficie-ampliacion" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
+            </div>
+          </div>
+        </section>
+
+        <!-- Paso 4: necesidades -->
+        <section class="screen" data-step="4" aria-labelledby="title-4" hidden>
+          <h1 class="title" id="title-4" tabindex="-1">¿Cómo imaginás tu proyecto?</h1>
+
+          <fieldset class="field">
+            <legend class="label">¿Qué espacios necesitás?</legend>
+            <div class="choices" data-choice="espacios"></div>
+          </fieldset>
+
+          <div class="field">
+            <label class="label" for="importante">¿Hay algo que para vos sea especialmente importante?</label>
+            <textarea id="importante" name="importante" rows="3"></textarea>
+          </div>
+
+          <div class="field">
+            <label class="label" for="referencias">¿Hay alguna referencia, estilo o idea que te gustaría incorporar?</label>
+            <textarea id="referencias" name="referencias" rows="3"></textarea>
+          </div>
+        </section>
+
+        <!-- Paso 5: presupuesto y tiempos -->
+        <section class="screen" data-step="5" aria-labelledby="title-5" hidden>
+          <h1 class="title" id="title-5" tabindex="-1">Para entender mejor el proyecto</h1>
+
+          <fieldset class="field">
+            <legend class="label">¿Tenés pensado un rango de inversión?</legend>
+            <div class="choices" data-choice="presupuesto"></div>
+          </fieldset>
+
+          <fieldset class="field">
+            <legend class="label">¿Cuándo te gustaría comenzar?</legend>
+            <div class="choices" data-choice="plazo"></div>
+          </fieldset>
+        </section>
+
+        <!-- Paso 6: información adicional -->
+        <section class="screen" data-step="6" aria-labelledby="title-6" hidden>
+          <h1 class="title" id="title-6" tabindex="-1">¿Querés contarnos algo más?</h1>
+
+          <div class="field">
+            <label class="label" for="comentarios">Contanos cualquier otra información que consideres importante para tu proyecto.</label>
+            <textarea id="comentarios" name="comentarios" rows="6"></textarea>
+          </div>
+        </section>
+
+        <!-- Paso 7: confirmación -->
+        <section class="screen" data-step="7" aria-labelledby="title-7" hidden>
+          <h1 class="title" id="title-7" tabindex="-1">Revisá tu consulta</h1>
+          <p class="lead">Si algo no es correcto, podés corregirlo antes de enviar.</p>
+          <dl class="summary" id="summary"></dl>
+        </section>
+
+        <!-- Campo trampa anti-spam: las personas no lo ven ni lo completan -->
+        <div class="hp" aria-hidden="true">
+          <label>No completar <input type="text" name="_gotcha" tabindex="-1" autocomplete="off"></label>
+        </div>
+
+        <p class="form-error" id="submitError" role="alert" hidden>
+          No pudimos enviar tu consulta. Revisá tu conexión e intentá de nuevo.
+        </p>
+
+        <div class="actions">
+          <button class="btn-text" type="button" id="backBtn">Atrás</button>
+          <button class="btn" type="submit" id="nextBtn">Continuar</button>
+        </div>
+      </form>
+
+      <!-- Final -->
+      <section class="screen success" data-step="8" aria-labelledby="title-8" hidden>
+        <span class="dots dots--large" aria-hidden="true"></span>
+        <h1 class="title" id="title-8" tabindex="-1">Gracias por contarnos sobre tu proyecto.</h1>
+        <p class="lead">Recibimos correctamente tu información. Nos pondremos en contacto con vos para conversar sobre los próximos pasos.</p>
+      </section>
+
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
