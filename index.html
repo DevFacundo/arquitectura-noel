@@ -9,6 +9,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
+   <link rel="icon" type="image/png" href="/assets/favicon.png">
 </head>
 <body>
   <div class="app">
@@ -108,59 +109,100 @@
               <input id="ubicacion-nueva" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
             </div>
             <div class="field">
-              <label class="label" for="superficie-nueva">¿Cuál es aproximadamente la superficie del terreno?</label>
-              <input id="superficie-nueva" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 300 m²" disabled>
-            </div>
-          </div>
-
-          <div data-branch="Reforma" hidden>
-            <div class="field">
-              <label class="label" for="ubicacion-reforma">¿Dónde se encuentra la propiedad?</label>
-              <input id="ubicacion-reforma" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+              <label class="label" for="superficie-terreno">¿Cuál es aproximadamente la superficie del terreno?</label>
+              <input id="superficie-terreno" name="superficie_terreno" type="text" autocomplete="off" placeholder="Ej.: 300 m²" disabled>
             </div>
             <fieldset class="field">
-              <legend class="label">¿Qué tipo de reforma estás pensando?</legend>
-              <div class="choices" data-choice="reforma_tipo"></div>
+              <legend class="label">¿Tenés plano de mensura o escritura del terreno?</legend>
+              <div class="choices" data-choice="mensura"></div>
             </fieldset>
-            <div class="field">
-              <label class="label" for="superficie-reforma">¿Cuál es aproximadamente la superficie existente?</label>
-              <input id="superficie-reforma" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
-            </div>
+            <fieldset class="field">
+              <legend class="label">¿En qué tipo de zona está el terreno?</legend>
+              <div class="choices" data-choice="zona_terreno"></div>
+            </fieldset>
           </div>
 
-          <div data-branch="Ampliación" hidden>
+          <div data-branch="Reforma,Ampliación" hidden>
             <div class="field">
-              <label class="label" for="ubicacion-ampliacion">¿Dónde se encuentra la propiedad?</label>
-              <input id="ubicacion-ampliacion" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+              <label class="label" for="ubicacion-existente">¿Dónde se encuentra la propiedad?</label>
+              <input id="ubicacion-existente" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+            </div>
+            <div data-branch="Reforma" hidden>
+              <fieldset class="field">
+                <legend class="label">¿Qué tipo de reforma estás pensando?</legend>
+                <div class="choices" data-choice="reforma_tipo"></div>
+              </fieldset>
+            </div>
+            <div class="field">
+              <label class="label" for="superficie-existente">¿Cuál es aproximadamente la superficie existente?</label>
+              <input id="superficie-existente" name="superficie_existente" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
             </div>
             <fieldset class="field">
-              <legend class="label">¿Qué te gustaría ampliar?</legend>
-              <div class="choices" data-choice="ampliacion_espacios"></div>
+              <legend class="label">¿La propiedad tiene planos aprobados?</legend>
+              <div class="choices" data-choice="planos_aprobados"></div>
             </fieldset>
             <div class="field">
-              <label class="label" for="superficie-ampliacion">¿Cuál es aproximadamente la superficie existente?</label>
-              <input id="superficie-ampliacion" name="superficie" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
+              <label class="label" for="antiguedad">¿Cuántos años tiene aproximadamente la construcción?</label>
+              <input id="antiguedad" name="antiguedad" type="text" autocomplete="off" placeholder="Ej.: 25 años" disabled>
             </div>
+            <fieldset class="field">
+              <legend class="label">¿Va a estar habitada durante la obra?</legend>
+              <div class="choices" data-choice="habitada"></div>
+            </fieldset>
+          </div>
+
+          <div data-branch="Regularización de planos" hidden>
+            <div class="field">
+              <label class="label" for="ubicacion-regularizacion">¿Dónde se encuentra la propiedad?</label>
+              <input id="ubicacion-regularizacion" name="ubicacion" type="text" autocomplete="off" placeholder="Calle y número" disabled>
+            </div>
+            <div class="field">
+              <label class="label" for="superficie-construida">¿Cuál es aproximadamente la superficie construida?</label>
+              <input id="superficie-construida" name="superficie_construida" type="text" autocomplete="off" placeholder="Ej.: 120 m²" disabled>
+            </div>
+            <fieldset class="field">
+              <legend class="label">¿Tenés planos anteriores de la propiedad?</legend>
+              <div class="choices" data-choice="planos_previos"></div>
+            </fieldset>
+            <fieldset class="field">
+              <legend class="label">¿Qué se construyó sin declarar?</legend>
+              <div class="choices" data-choice="construido_sin_declarar"></div>
+            </fieldset>
+            <fieldset class="field">
+              <legend class="label">¿Recibiste alguna notificación municipal?</legend>
+              <div class="choices" data-choice="notificacion"></div>
+            </fieldset>
           </div>
         </section>
 
-        <!-- Paso 4: necesidades -->
+        <!-- Paso 4: necesidades (cambia según el tipo de proyecto; Regularización lo saltea) -->
         <section class="screen" data-step="4" aria-labelledby="title-4" hidden>
           <h1 class="title" id="title-4" tabindex="-1">¿Cómo imaginás tu proyecto?</h1>
 
-          <fieldset class="field">
-            <legend class="label">¿Qué espacios necesitás?</legend>
-            <div class="choices" data-choice="espacios"></div>
-          </fieldset>
-
-          <div class="field">
-            <label class="label" for="importante">¿Hay algo que para vos sea especialmente importante?</label>
-            <textarea id="importante" name="importante" rows="3"></textarea>
+          <div data-branch="Obra nueva" hidden>
+            <fieldset class="field">
+              <legend class="label">¿Qué espacios necesitás?</legend>
+              <div class="choices" data-choice="espacios"></div>
+            </fieldset>
           </div>
 
-          <div class="field">
-            <label class="label" for="referencias">¿Hay alguna referencia, estilo o idea que te gustaría incorporar?</label>
-            <textarea id="referencias" name="referencias" rows="3"></textarea>
+          <div data-branch="Reforma,Ampliación" hidden>
+            <fieldset class="field">
+              <legend class="label">¿En qué ambientes van a trabajar?</legend>
+              <p class="hint">Marcá cada ambiente y contanos qué se haría ahí. Si no estás seguro, elegí “Todavía no lo sé”.</p>
+              <div class="rooms" id="rooms"></div>
+            </fieldset>
+          </div>
+
+          <div data-branch="Obra nueva,Reforma,Ampliación" hidden>
+            <div class="field">
+              <label class="label" for="importante">¿Hay algo que para vos sea especialmente importante?</label>
+              <textarea id="importante" name="importante" rows="3" disabled></textarea>
+            </div>
+            <div class="field">
+              <label class="label" for="referencias">¿Hay alguna referencia, estilo o idea que te gustaría incorporar?</label>
+              <textarea id="referencias" name="referencias" rows="3" disabled></textarea>
+            </div>
           </div>
         </section>
 
