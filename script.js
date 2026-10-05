@@ -45,10 +45,10 @@ const OPTIONS = {
     type: "radio",
     values: [
       "Todavía no lo definí",
-      "Hasta USD 20.000",
+      "Hasta USD 10.000",
+      "USD 10.000 – 20.000",
       "USD 20.000 – 30.000",
-      "USD 30.000 – 40.000",
-      "Más de USD 40.000",
+      "Más de USD 30.000",
       "Prefiero conversarlo personalmente",
     ],
   },
